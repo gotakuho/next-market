@@ -1,9 +1,8 @@
 "use client"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-// import Header from "../../components/header"
-// import Footer from "../../components/footer"
+import Header from "../../../components/Header"
+import Footer from "../../../components/Footer"
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -14,7 +13,7 @@ const Login = () => {
         e.preventDefault()
 
         try {
-            const response = await fetch("http://localhost:3000/api/user/login", {
+            const response = await fetch("/api/user/login", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -37,7 +36,8 @@ const Login = () => {
                 alert(jsonData.message)
             }
 
-        } catch {
+        } catch (error) {
+            console.log(error)
             alert("ログイン失敗")
         }
     }
