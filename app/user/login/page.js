@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import Header from "../../components/header"
-import Footer from "../../components/footer"
+// import Header from "../../components/header"
+// import Footer from "../../components/footer"
 
 const Login = () => {
     const [email, setEmail] = useState("")
