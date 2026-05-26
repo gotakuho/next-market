@@ -15,7 +15,7 @@ const Register = () => {
         try {
 
             const response = await fetch(
-                "http://localhost:3000/api/user/register",
+                '${process.env.NEXT_PUBLIC_URL}/api/user/register',
                 {
                     method: "POST",
                     headers: {
