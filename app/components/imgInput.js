@@ -4,7 +4,7 @@ import { useState } from "react"
 
 const ImgInput = (props) => {
 
-    const [imageFile, setImageFile] = useState("")
+    const [imageFile, setImageFile] = useState(null)
 
     const handleClick = async () => {
 
@@ -13,15 +13,10 @@ const ImgInput = (props) => {
             const data = new FormData()
 
             data.append("file", imageFile)
-
-            // Cloudinary Upload Preset
-            data.append("upload_preset", "你的upload_preset")
-
-            // Cloudinary Cloud Name
-            data.append("cloud_name", "你的cloud_name")
+            data.append("upload_preset", "upclpe2")
 
             const response = await fetch(
-                "https://api.cloudinary.com/v1_1/你的cloud_name/image/upload",
+                "https://api.cloudinary.com/v1_1/6fs9n32/image/upload",
                 {
                     method: "POST",
                     body: data,
@@ -30,28 +25,27 @@ const ImgInput = (props) => {
 
             const jsonData = await response.json()
 
-            alert("画像アップロード成功")
+            console.log(jsonData)
 
-            // 把图片URL传给父组件
-            props.setImage(jsonData.url)
+            props.setImage(jsonData.secure_url)
+
+            alert("画像アップロード成功")
 
         } catch (error) {
 
-            alert("画像アップロード失敗")
-
             console.log(error)
 
+            alert("画像アップロード失敗")
         }
     }
 
     return (
-
         <div className="img-input">
 
             <input
                 type="file"
                 onChange={(e) => setImageFile(e.target.files[0])}
-                accept="image/png, image/jpg"
+                accept="image/png, image/jpeg"
             />
 
             <button
@@ -62,7 +56,6 @@ const ImgInput = (props) => {
             </button>
 
         </div>
-
     )
 }
 
