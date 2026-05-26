@@ -3,32 +3,79 @@
 import { useState } from "react"
 
 const Register = () => {
-    const [name, setName] = useState("吉田")
-    console.log(name)
 
-    const handlesubmit = () => {
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault()
+
         try {
-            fetch("http://localhost:3000/api/user/register", {
-                method: "POST",
-                headers: {
-                    "Accept": "application/json"
-                },
-                body: "ダミーデータ"
-            })
+
+            const response = await fetch(
+                "http://localhost:3000/api/user/register",
+                {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        password: password
+                    })
+                }
+            )
+
+            const jsonData = await response.json()
+
+            alert(jsonData.message)
+
         } catch {
+
+            alert("ユーザー登録失敗")
+
         }
     }
 
     return (
         <div>
+
             <h1>ユーザー登録</h1>
 
-            <form onSubmit={handlesubmit}>
-                <input type="text" name="name" placeholder="名前" required />
-                <input type="text" name="email" placeholder="メールアドレス" required />
-                <input type="text" name="password" placeholder="パスワード" required />
+            <form onSubmit={handleSubmit}>
+
+                <input
+                    type="text"
+                    placeholder="名前"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+
+                <input
+                    type="text"
+                    placeholder="メールアドレス"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <input
+                    type="password"
+                    placeholder="パスワード"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
                 <button>登録</button>
+
             </form>
+
         </div>
     )
 }

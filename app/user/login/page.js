@@ -1,8 +1,6 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import Header from "../../../components/Header"
-import Footer from "../../../components/Footer"
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -44,8 +42,6 @@ const Login = () => {
 
     return (
         <>
-            <Header />
-
             <div>
                 <h1 className="page-title">ログイン</h1>
 
@@ -69,8 +65,6 @@ const Login = () => {
                     <button>ログイン</button>
                 </form>
             </div>
-
-            <Footer />
         </>
     )
 }
